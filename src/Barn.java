@@ -10,7 +10,7 @@ public class Barn {
 
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
@@ -18,7 +18,7 @@ public class Barn {
         this.name = name;
     }
 
-    public int getId() {
+    int getId() {
         return id;
     }
 

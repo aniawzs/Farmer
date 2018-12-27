@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Animal {
@@ -15,11 +14,11 @@ public class Animal {
         this.barnId = barnId;
     }
 
-    public int getBarnId() {
+    int getBarnId() {
         return barnId;
     }
 
-    public void setBarnId(int barnId) {
+    void setBarnId(int barnId) {
         this.barnId = barnId;
     }
 
@@ -28,7 +27,7 @@ public class Animal {
     }
 
 
-    public String getType() {
+    String getType() {
         return type;
     }
 
@@ -44,7 +43,7 @@ public class Animal {
         this.age = age;
     }
 
-    public boolean isVaccinated() {
+    boolean isVaccinated() {
         return isVaccinated;
     }
 
@@ -53,7 +52,7 @@ public class Animal {
     }
 
 
-    public static List<String> returnAnimalTypeList(){
+    static List<String> returnAnimalTypeList(){
         List<String> list = new ArrayList<>();
 
         for (AnimalType f : AnimalType.values()) {

@@ -11,7 +11,6 @@ class Menu {
         this.scanner = new Scanner(System.in);
     }
 
-
     void runMenu() {
         printProgramGreetings();
 
@@ -51,19 +50,18 @@ class Menu {
                 case "10":
                     exitMenu();
                     break;
-
             }
         }
     }
 
     private void printMenuOptions() {
         System.out.println("Wybierz jedną z poniższych opcji:\n" +
-                "1. Dodaj zwierzę \n" +
-                "2. Usuń zwierzę \n" +
-                "3. Dodaj stodołę \n" +
-                "4. Usuń stodołę \n" +
-                "5. Zobacz 5 najstarszych zwierząt \n" +
-                "6. Zobacz 5 najmłodszych zwierząt \n" +
+                "1. Dodaj zwierzę\n" +
+                "2. Usuń zwierzę\n" +
+                "3. Dodaj stodołę\n" +
+                "4. Usuń stodołę\n" +
+                "5. Zobacz 5 najstarszych zwierząt\n" +
+                "6. Zobacz 5 najmłodszych zwierząt\n" +
                 "7. Zobacz stodołę z największą iloscią zwierząt\n" +
                 "8. Zobacz najliczniejszy gatunek\n" +
                 "9. Zobacz szczepione zwierzęta\n" +
@@ -77,5 +75,4 @@ class Menu {
     private void printProgramGreetings(){
         System.out.println("Witaj w programie do zarządzania farmą!");
     }
-
 }

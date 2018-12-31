@@ -43,13 +43,14 @@ public class Animal {
     }
 
     static List<String> returnAnimalTypeList(){
-        List<String> list = new ArrayList<>();
+        List<String> animalTypesList = new ArrayList<>();
 
-        for (AnimalType f : AnimalType.values()) {
-            String s = f.toString();
-            list.add(s);
+        for (AnimalType enumType : AnimalType.values()) {
+            String animalType = enumType.toString();
+            animalTypesList.add(animalType);
         }
-        return new ArrayList<>(list);
+
+        return animalTypesList;
     }
 
     @Override

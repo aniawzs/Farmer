@@ -36,7 +36,6 @@ class DatabaseUtils {
         }
     }
 
-
     private List<String> returnListOfAllAnimals(){
         List<String> animalList = null;
 
@@ -57,13 +56,13 @@ class DatabaseUtils {
         if(animalList != null && !animalList.isEmpty()) {
             for (int i = 0; i < animalList.size(); i++) {
                 String[] animal = returnListOfAllAnimals().get(i).split(",");
-                animalsObjectsList.add(new Animal(animal[0], Integer.parseInt(animal[1]), Boolean.valueOf(animal[2]),Integer.parseInt(animal[3])));
+                animalsObjectsList.add(new Animal(animal[0], Integer.parseInt(animal[1]), Boolean.valueOf(animal[2]),
+                        Integer.parseInt(animal[3])));
             }
         }
 
         return animalsObjectsList;
     }
-
 
     private List<String> returnListOfAllBarns(){
         List<String> barnsList = null;
@@ -77,7 +76,6 @@ class DatabaseUtils {
 
         return barnsList;
     }
-
 
     List<Barn> returnBarnsAsObjects(){
         List<Barn> barnsObjectsList = new ArrayList<>();
@@ -102,7 +100,6 @@ class DatabaseUtils {
         }
     }
 
-
     void addBarnToDatabase(Barn barn) {
         try {
             createBarnsDatabase();
@@ -120,8 +117,11 @@ class DatabaseUtils {
 
     void removeAnimalFromDataBase(List<Animal> animalListAfterRemoval) {
         try {
-            createAnimalsDatabase();
-            Files.write(animalsDatabaseFile.toPath(), (animalListAfterRemoval.toString() +"\r\n").getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+            Files.newBufferedWriter(animalsDatabaseFile.toPath(), StandardOpenOption.TRUNCATE_EXISTING);
+
+            for(Animal animal:animalListAfterRemoval) {
+                Files.write(animalsDatabaseFile.toPath(), (animal.toString() + "\r\n").getBytes(), StandardOpenOption.APPEND);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,8 +129,11 @@ class DatabaseUtils {
 
     void removeBarnFromDataBase(List<Barn> barnListAfterRemoval) {
         try {
-            createAnimalsDatabase();
-            Files.write(barnsDatabaseFile.toPath(), (barnListAfterRemoval.toString() +"\r\n").getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+            Files.newBufferedWriter(barnsDatabaseFile.toPath(), StandardOpenOption.TRUNCATE_EXISTING);
+
+            for(Barn barn : barnListAfterRemoval) {
+                Files.write(barnsDatabaseFile.toPath(), (barn.toString() + "\r\n").getBytes(), StandardOpenOption.APPEND);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

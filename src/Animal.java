@@ -26,31 +26,21 @@ public class Animal {
         GOAT, SHEEP, PIGSCATTLE, DONKEYS, HORSE, YAK, LIAMA, PIG, MULE, ALPACA, MOOSE
     }
 
-
     String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     boolean isVaccinated() {
         return isVaccinated;
     }
 
-    public void setVaccinated(boolean vaccinated) {
-        isVaccinated = vaccinated;
+    int getAge() {
+        return age;
     }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     static List<String> returnAnimalTypeList(){
         List<String> list = new ArrayList<>();

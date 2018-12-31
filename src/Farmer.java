@@ -4,23 +4,23 @@ import java.util.stream.Collectors;
 
 class Farmer {
     private Scanner scanner;
-    private DatabaseUtils database;
+    private DatabaseUtils databaseUtils;
 
     Farmer() {
         this.scanner = new Scanner(System.in);
-        this.database = new DatabaseUtils();
+        this.databaseUtils = new DatabaseUtils();
     }
 
     void addAnimal() {
-        database.addAnimalToDatabase(createAnimal());
+        databaseUtils.addAnimalToDatabase(createAnimal());
         System.out.println("Nowe zwierzę zostało dodane.");
     }
 
     void removeAnimal() {
-        List<Animal> animalsList = database.returnAnimalsAsObjects();
+        List<Animal> animalsList = databaseUtils.returnAnimalsAsObjects();
 
         if (animalsList != null && !animalsList.isEmpty()) {
-            database.removeAnimalFromDataBase(passNewAnimalListToBeingStoredInDatabase(animalsList));
+            databaseUtils.removeAnimalFromDataBase(passNewAnimalListToBeingStoredInDatabase(animalsList));
             System.out.println("Zwierzęta zostały usunięte z farmy!");
         } else {
             System.out.println("Na farmie nie ma żadnego zwierzęcia, które mogłoby zostać usunięte!");
@@ -28,15 +28,15 @@ class Farmer {
     }
 
     void addBarn() {
-        database.addBarnToDatabase(createBarn());
+        databaseUtils.addBarnToDatabase(createBarn());
         System.out.println("Nowa stodoła została dodana.");
     }
 
     void removeBarn() {
-        List<Barn> barnsList = database.returnBarnsAsObjects();
+        List<Barn> barnsList = databaseUtils.returnBarnsAsObjects();
 
         if (barnsList != null && !barnsList.isEmpty()) {
-            database.removeBarnFromDataBase(passNewBarnsListToBeingStoreInDatabase(barnsList));
+            databaseUtils.removeBarnFromDataBase(passNewBarnsListToBeingStoreInDatabase(barnsList));
             System.out.println("Stodoła została usunięta!");
         } else {
             System.out.println("Nie ma żadnej stodoły, którą można byłoby usunąć!");
@@ -69,7 +69,7 @@ class Farmer {
     }
 
     private List<String> getAnimalsReversedSortedListByAge() {
-        List<Animal> animalsList = database.returnAnimalsAsObjects();
+        List<Animal> animalsList = databaseUtils.returnAnimalsAsObjects();
 
         return animalsList.stream()
                 .sorted(Comparator.comparing(Animal::getAge).reversed())
@@ -85,7 +85,7 @@ class Farmer {
     }
 
     private List<String> getAnimalsSortedListByAge() {
-        List<Animal> animalsList = database.returnAnimalsAsObjects();
+        List<Animal> animalsList = databaseUtils.returnAnimalsAsObjects();
 
         return animalsList.stream()
                 .sorted(Comparator.comparing(Animal::getAge))
@@ -94,8 +94,8 @@ class Farmer {
     }
 
     void returnBarnWithGreatestAnimalsNumber() {
-        List<Animal> animalsList = database.returnAnimalsAsObjects();
-        List<Barn> barnsList = database.returnBarnsAsObjects();
+        List<Animal> animalsList = databaseUtils.returnAnimalsAsObjects();
+        List<Barn> barnsList = databaseUtils.returnBarnsAsObjects();
         Map<Integer, Integer> animalsCountMap = new HashMap<>();
 
         if (animalsList != null && !animalsList.isEmpty()) {
@@ -129,7 +129,7 @@ class Farmer {
     }
 
     void returnMostPopularAnimal() {
-        List<Animal> animalsList = database.returnAnimalsAsObjects();
+        List<Animal> animalsList = databaseUtils.returnAnimalsAsObjects();
         Map<String, Integer> animalCountMap = new HashMap<>();
 
         if (animalsList != null && !animalsList.isEmpty()) {
@@ -158,7 +158,7 @@ class Farmer {
     }
 
     void returnAllVaccinatedAnimals() {
-        List<Animal> animalsList = database.returnAnimalsAsObjects();
+        List<Animal> animalsList = databaseUtils.returnAnimalsAsObjects();
         List<String> vaccinatedAnimalsList = new ArrayList<>();
 
         if (animalsList != null && !animalsList.isEmpty()) {
@@ -208,7 +208,7 @@ class Farmer {
             System.out.println("Nie masz stodoły, do której możesz dodać zwierzę. Dodaj najpierw stodołę!");
 
             Barn barn = createBarn();
-            database.addBarnToDatabase(barn);
+            databaseUtils.addBarnToDatabase(barn);
 
             return barn.getId();
         }
@@ -260,7 +260,7 @@ class Farmer {
 
     private List<Integer> returnBarnsIdList() {
         List<Integer> barnsIdList = new ArrayList<>();
-        List<Barn> barnsList = database.returnBarnsAsObjects();
+        List<Barn> barnsList = databaseUtils.returnBarnsAsObjects();
 
         if (barnsList != null && !barnsList.isEmpty()) {
             for (Barn barn : barnsList) {
@@ -308,7 +308,7 @@ class Farmer {
     }
 
     private String validateAnimalToRemove() {
-        List<String> allAvailableAnimals = database.returnAllAddedAnimalTypes();
+        List<String> allAvailableAnimals = databaseUtils.returnAllAddedAnimalTypes();
         String animalToRemove = scanner.next();
 
         while (!allAvailableAnimals.contains(animalToRemove)) {
@@ -320,7 +320,7 @@ class Farmer {
     }
 
     private List<Barn> passNewBarnsListToBeingStoreInDatabase(List<Barn> barnsList) {
-        List<Animal> animalList = database.returnAnimalsAsObjects();
+        List<Animal> animalList = databaseUtils.returnAnimalsAsObjects();
 
         System.out.println("Podaj id stodoły do usunięcia.");
         int barnIdToRemove = validateBarnIdToRemove();
@@ -364,17 +364,17 @@ class Farmer {
     }
 
     private void changeBarnIdForAnimalsWhichBarnHasBeenRemoved(int barnIdToRemove) {
-        database.removeAnimalFromDataBase(changeAnimalBarnIdForAnimalsFromBarnToRemove(barnIdToRemove));
+        databaseUtils.removeAnimalFromDataBase(changeAnimalBarnIdForAnimalsFromBarnToRemove(barnIdToRemove));
         System.out.println("Zwierzęta zostaly przypisane do nowej farmy!");
     }
 
     private void removeAnimalFromDataBaseAfterRemovingBarn(int barnIdToRemove) {
-        database.removeAnimalFromDataBase(removeAnimalAssignToBarnForRemoval(barnIdToRemove));
+        databaseUtils.removeAnimalFromDataBase(removeAnimalAssignToBarnForRemoval(barnIdToRemove));
         System.out.println("Zwierzęta umieszczone w stodole zostały usunięte!");
     }
 
     private List<Animal> changeAnimalBarnIdForAnimalsFromBarnToRemove(int barnIdToRemove) {
-        List<Animal> animalsList = database.returnAnimalsAsObjects();
+        List<Animal> animalsList = databaseUtils.returnAnimalsAsObjects();
         System.out.println("Podaj nowy numer stodoły, do której zostaną przypisane zwierzęta!");
         int id = validateBarnIdInputUsedToTransferAnimalWhileDeletingBarn(barnIdToRemove);
 
@@ -387,7 +387,7 @@ class Farmer {
     }
 
     private List<Animal> removeAnimalAssignToBarnForRemoval(int barnIdToRemove) {
-        List<Animal> animalsList = database.returnAnimalsAsObjects();
+        List<Animal> animalsList = databaseUtils.returnAnimalsAsObjects();
 
         return animalsList.stream()
                 .filter(e -> e.getBarnId() != barnIdToRemove)

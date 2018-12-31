@@ -115,11 +115,11 @@ class DatabaseUtils {
         return animalList.stream().map(Animal::getType).collect(Collectors.toList());
     }
 
-    void removeAnimalFromDataBase(List<Animal> animalListAfterRemoval) {
+    void removeAnimalFromDataBase(List<Animal> animalsListAfterRemoval) {
         try {
             Files.newBufferedWriter(animalsDatabaseFile.toPath(), StandardOpenOption.TRUNCATE_EXISTING);
 
-            for(Animal animal:animalListAfterRemoval) {
+            for(Animal animal:animalsListAfterRemoval) {
                 Files.write(animalsDatabaseFile.toPath(), (animal.toString() + "\r\n").getBytes(), StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
@@ -127,11 +127,11 @@ class DatabaseUtils {
         }
     }
 
-    void removeBarnFromDataBase(List<Barn> barnListAfterRemoval) {
+    void removeBarnFromDataBase(List<Barn> barnsListAfterRemoval) {
         try {
             Files.newBufferedWriter(barnsDatabaseFile.toPath(), StandardOpenOption.TRUNCATE_EXISTING);
 
-            for(Barn barn : barnListAfterRemoval) {
+            for(Barn barn : barnsListAfterRemoval) {
                 Files.write(barnsDatabaseFile.toPath(), (barn.toString() + "\r\n").getBytes(), StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
